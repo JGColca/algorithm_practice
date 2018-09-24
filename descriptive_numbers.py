@@ -1,13 +1,16 @@
 def ask_user_for_number():
     while True:
         try:
-            number = input("Enter a number to get descriptive number: ")
+            input_number = int(input("Enter a number between 1 and 100 to get descriptive number: "))
+            if input_number > 100 or input_number < 1:
+                print("******** Please enter a number between 1 and 100 ********")
+                input_number = int(input("Enter a number between 1 and 100 to get descriptive number: "))
         except ValueError:
-            print("********  Please enter a number. ********")
-            number = input("Enter a number to get descriptive number: ")
-        return number
+            print("********  Please enter a number between 1 and 100. ********")
+            input_number = int(input("Enter a number between 1 and 100 to get descriptive number: "))
+        return input_number
 
-number = ask_user_for_number()
+number = str(ask_user_for_number())
 
 def add_placeholders(number):
     if len(number) == 1:
@@ -104,8 +107,20 @@ def descriptive_number(number):
         des_number = f'{hundreds(number)}{tens(number)}{ones(number)}'
     return des_number
 
-
 print(descriptive_number(number))
-    
-    
+
+while True:
+  try:
+      choice = input('Do you wish to convert another number to text?  Press Y to continue or any other character to quit: ')
+
+      if (choice != "Y" and choice != "y"):
+        break
+      else: 
+        number = str(ask_user_for_number())
+        number = add_placeholders(number)
+        print(descriptive_number(number))
+  except ValueError:    
+    print("Try again")
+
+print("Thank you for using number to text converter.")
 
